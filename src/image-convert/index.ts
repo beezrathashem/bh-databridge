@@ -15,7 +15,8 @@ const image_convert = {
       await awsService.upload({
         buffer,
         imageKey: upload.image_key,
-        bucket: process.env.AWS_THUMBNAILS_BUCKET,
+        bucket,
+        region,
       });
       }
     } catch (err) {
