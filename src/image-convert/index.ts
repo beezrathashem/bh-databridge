@@ -1,24 +1,27 @@
-
 import awsService from '../aws/aws'
 
 const image_convert = {
-  convertImages: async ({ uploads, bucket, region }: any) => {
+  convert: async ({ uploads, bucket, region }: any) => {
     try {
+      const images = {}
       for (let upload of uploads) {
-      const https = require('https');
-      const buffer = await new Promise(resolve => {
-        https.get(upload.image_url).on('response', function (stream) {
-          resolve(stream);
+        const https = require('https');
+        const buffer = await new Promise(resolve => {
+          https.get(upload.image_url).on('response', function (stream) {
+            resolve(stream);
+          });
         });
-      });
 
-      await awsService.upload({
-        buffer,
-        imageKey: upload.image_key,
-        bucket,
-        region,
-      });
+        images[upload.key] = `https://${bucket}.s3.${region}.amazonaws.com/${upload.image_key}`;
+
+        await awsService.upload({
+          buffer,
+          imageKey: upload.image_key,
+          bucket,
+          region,
+        });
       }
+      return thumbnails
     } catch (err) {
       // bugsnag}
     } finally {

@@ -2,22 +2,20 @@ import MEDIA_JOB_PARAMS from './mediaConvertCreateJob';
 const awsSdk = require('aws-sdk');
 
 const AWS = {
-  createJob: async (videoId: string, lectureId: string) => {
-    await awsSdk.config.loadFromPath(`./${process.env.AWS_CONFIG_PATH}.json`);
-
+  createJob: async ({ videoId, lectureId, region }) => {
     const endpointPromise = new awsSdk.MediaConvert({
       apiVersion: '2017-08-29',
-      region: 'us-west-1',
-    })
-      .describeEndpoints({
+      region,
+    }).describeEndpoints({
         MaxResults: 0,
       })
       .promise();
+
     return await new Promise((resolve, reject) => {
       endpointPromise.then(
         function (data) {
           const mediaConvert = new awsSdk.MediaConvert({
-            region: 'us-west-1',
+            region,
             apiVersion: '2017-08-29',
             endpoint: data.Endpoints[0].Url,
           });
@@ -37,7 +35,7 @@ const AWS = {
   upload: async ({ imageKey, region, buffer, bucket }: { imageKey: string; region: string; buffer: any; bucket: string }) => {
     await awsSdk.config.loadFromPath(`./${process.env.AWS_CONFIG_PATH}.json`);
     const s3 = new awsSdk.S3({
-      region,
+      region: ,
     });
 
     const params = {
