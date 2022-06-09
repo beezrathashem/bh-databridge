@@ -3,7 +3,6 @@ const MEDIA_JOB_PARAMS = (videoId: string, lectureId: string, actionType: "compl
     UserMetadata: {
       lectureId,
       videoId,
-      project: process.env.FIREBASE_STORAGE_BUCKET,
       actionType,
     },
     Role: process.env.AWS_MEDIA_CONVERT_ROLE,

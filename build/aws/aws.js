@@ -81,9 +81,7 @@ var AWS = {
             var s3, params;
             return __generator(this, function (_b) {
                 switch (_b.label) {
-                    case 0: return [4 /*yield*/, awsSdk.config.loadFromPath("./".concat(process.env.AWS_CONFIG_PATH, ".json"))];
-                    case 1:
-                        _b.sent();
+                    case 0:
                         s3 = new awsSdk.S3({
                             region: region
                         });
@@ -124,7 +122,7 @@ var AWS = {
                                 //   );
                                 // });
                             })];
-                    case 2: return [2 /*return*/, _b.sent()];
+                    case 1: return [2 /*return*/, _b.sent()];
                 }
             });
         });

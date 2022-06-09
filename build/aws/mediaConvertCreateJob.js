@@ -7,7 +7,6 @@ var MEDIA_JOB_PARAMS = function (videoId, lectureId, actionType) {
         UserMetadata: {
             lectureId: lectureId,
             videoId: videoId,
-            project: process.env.FIREBASE_STORAGE_BUCKET,
             actionType: actionType
         },
         Role: process.env.AWS_MEDIA_CONVERT_ROLE,

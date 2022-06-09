@@ -33,7 +33,6 @@ const AWS = {
     });
   },
   upload: async ({ imageKey, region, buffer, bucket }: { imageKey: string; region: string; buffer: any; bucket: string }) => {
-    await awsSdk.config.loadFromPath(`./${process.env.AWS_CONFIG_PATH}.json`);
     const s3 = new awsSdk.S3({
       region,
     });
