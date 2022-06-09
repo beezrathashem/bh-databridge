@@ -36,13 +36,62 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
+var aws_1 = require("../aws/aws");
 var image_convert = {
-    convertImages: function (_a) {
-        var video_id = _a.video_id, bucket = _a.bucket, region = _a.region;
+    convert: function (_a) {
+        var uploads = _a.uploads, bucket = _a.bucket, region = _a.region;
         return __awaiter(void 0, void 0, void 0, function () {
+            var images, _loop_1, _i, uploads_1, upload, err_1;
             return __generator(this, function (_b) {
-                console.log("HIHIHI");
-                return [2 /*return*/];
+                switch (_b.label) {
+                    case 0:
+                        _b.trys.push([0, 5, 6, 7]);
+                        images = {};
+                        _loop_1 = function (upload) {
+                            var https, buffer;
+                            return __generator(this, function (_c) {
+                                switch (_c.label) {
+                                    case 0:
+                                        https = require('https');
+                                        return [4 /*yield*/, new Promise(function (resolve) {
+                                                https.get(upload.image_url).on('response', function (stream) {
+                                                    resolve(stream);
+                                                });
+                                            })];
+                                    case 1:
+                                        buffer = _c.sent();
+                                        images[upload.key] = "https://".concat(bucket, ".s3.").concat(region, ".amazonaws.com/").concat(upload.image_key);
+                                        return [4 /*yield*/, aws_1["default"].upload({
+                                                buffer: buffer,
+                                                imageKey: upload.image_key,
+                                                bucket: bucket,
+                                                region: region
+                                            })];
+                                    case 2:
+                                        _c.sent();
+                                        return [2 /*return*/];
+                                }
+                            });
+                        };
+                        _i = 0, uploads_1 = uploads;
+                        _b.label = 1;
+                    case 1:
+                        if (!(_i < uploads_1.length)) return [3 /*break*/, 4];
+                        upload = uploads_1[_i];
+                        return [5 /*yield**/, _loop_1(upload)];
+                    case 2:
+                        _b.sent();
+                        _b.label = 3;
+                    case 3:
+                        _i++;
+                        return [3 /*break*/, 1];
+                    case 4: return [2 /*return*/, images];
+                    case 5:
+                        err_1 = _b.sent();
+                        return [3 /*break*/, 7];
+                    case 6: return [7 /*endfinally*/];
+                    case 7: return [2 /*return*/];
+                }
             });
         });
     }

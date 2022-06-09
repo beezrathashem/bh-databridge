@@ -21,7 +21,7 @@ const image_convert = {
           region,
         });
       }
-      return thumbnails
+      return images
     } catch (err) {
       // bugsnag}
     } finally {
