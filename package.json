@@ -1,19 +1,19 @@
 {
   "name": "bh-databridge",
   "version": "0.0.0",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
   "source": "./src/index.ts",
   "private": true,
   "files": [
-    "dist/**"
+    "build/**"
   ],
   "scripts": {
     "test": "jest",
     "dev": "tsc -w",
     "build": "tsc",
     "lint": "TIMING=1 eslint src/**/*.ts* --fix",
-    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf build"
   },
   "devDependencies": {
     "@types/jest": "^26.0.22",
