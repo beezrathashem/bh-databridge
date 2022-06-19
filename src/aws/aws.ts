@@ -35,7 +35,7 @@ const AWS = {
   upload: async ({ imageKey, region, env, buffer, bucket }: { imageKey: string; env: any, region: string; buffer: any; bucket: string }) => {
     const s3 = new awsSdk.S3({
       region,
-      env
+      ...env
     });
 
     const params = {

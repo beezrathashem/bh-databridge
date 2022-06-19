@@ -39,7 +39,7 @@ exports.__esModule = true;
 var aws_1 = require("../aws/aws");
 var image_convert = {
     convert: function (_a) {
-        var uploads = _a.uploads, bucket = _a.bucket, region = _a.region;
+        var uploads = _a.uploads, env = _a.env, bucket = _a.bucket, region = _a.region;
         return __awaiter(void 0, void 0, void 0, function () {
             var images, _loop_1, _i, uploads_1, upload, err_1;
             return __generator(this, function (_b) {
@@ -65,6 +65,7 @@ var image_convert = {
                                                 buffer: buffer,
                                                 imageKey: upload.image_key,
                                                 bucket: bucket,
+                                                env: env,
                                                 region: region
                                             })];
                                     case 2:

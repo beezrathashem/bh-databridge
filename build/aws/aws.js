@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -76,15 +87,13 @@ var AWS = {
         });
     },
     upload: function (_a) {
-        var imageKey = _a.imageKey, region = _a.region, buffer = _a.buffer, bucket = _a.bucket;
+        var imageKey = _a.imageKey, region = _a.region, env = _a.env, buffer = _a.buffer, bucket = _a.bucket;
         return __awaiter(void 0, void 0, void 0, function () {
             var s3, params;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        s3 = new awsSdk.S3({
-                            region: region
-                        });
+                        s3 = new awsSdk.S3(__assign({ region: region }, env));
                         params = {
                             Bucket: bucket,
                             Key: "".concat(imageKey),
