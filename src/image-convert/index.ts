@@ -1,7 +1,7 @@
 import awsService from '../aws/aws'
 
 const image_convert = {
-  convert: async ({ uploads, env, bucket, region }: any) => {
+  convert: async ({ uploads, bucket, region }: any) => {
     try {
       const images = {}
       for (let upload of uploads) {
@@ -18,7 +18,6 @@ const image_convert = {
           buffer,
           imageKey: upload.image_key,
           bucket,
-          env,
           region,
         });
       }

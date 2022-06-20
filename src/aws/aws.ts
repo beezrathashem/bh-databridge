@@ -32,10 +32,9 @@ const AWS = {
       );
     });
   },
-  upload: async ({ imageKey, region, env, buffer, bucket }: { imageKey: string; env: any, region: string; buffer: any; bucket: string }) => {
+  upload: async ({ imageKey, region, buffer, bucket }: { imageKey: string; region: string; buffer: any; bucket: string }) => {
     const s3 = new awsSdk.S3({
-      region,
-      ...env
+      region
     });
 
     const params = {
