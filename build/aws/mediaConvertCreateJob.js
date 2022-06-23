@@ -4,7 +4,7 @@ var QUALITY_OPTIONS = {
     "1080": 6000000,
     "720": 4000000,
     "480": 1000000,
-    "0": 0
+    "audio": 0
 };
 var MEDIA_JOB_PARAMS = function (videoId, lectureId, actionType, quality) {
     if (actionType === void 0) { actionType = "complete"; }
