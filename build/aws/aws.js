@@ -40,7 +40,7 @@ var mediaConvertCreateJob_1 = require("./mediaConvertCreateJob");
 var awsSdk = require('aws-sdk');
 var AWS = {
     createJob: function (_a) {
-        var videoId = _a.videoId, lectureId = _a.lectureId, region = _a.region;
+        var videoId = _a.videoId, lectureId = _a.lectureId, region = _a.region, quality = _a.quality;
         return __awaiter(void 0, void 0, void 0, function () {
             var endpointPromise;
             return __generator(this, function (_b) {
@@ -60,7 +60,7 @@ var AWS = {
                                         apiVersion: '2017-08-29',
                                         endpoint: data.Endpoints[0].Url
                                     });
-                                    mediaConvert.createJob((0, mediaConvertCreateJob_1["default"])(videoId, lectureId, 'skip'), function (err, data) {
+                                    mediaConvert.createJob((0, mediaConvertCreateJob_1["default"])(videoId, lectureId, 'skip', quality), function (err, data) {
                                         if (err) {
                                             reject(err);
                                         }

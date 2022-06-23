@@ -2,7 +2,7 @@ import MEDIA_JOB_PARAMS from './mediaConvertCreateJob';
 const awsSdk = require('aws-sdk');
 
 const AWS = {
-  createJob: async ({ videoId, lectureId, region }) => {
+  createJob: async ({ videoId, lectureId, region, quality }) => {
     const endpointPromise = new awsSdk.MediaConvert({
       apiVersion: '2017-08-29',
       region,
@@ -19,7 +19,7 @@ const AWS = {
             apiVersion: '2017-08-29',
             endpoint: data.Endpoints[0].Url,
           });
-          mediaConvert.createJob(MEDIA_JOB_PARAMS(videoId, lectureId, 'skip'), function (err, data) {
+          mediaConvert.createJob(MEDIA_JOB_PARAMS(videoId, lectureId, 'skip', quality), function (err, data) {
             if (err) {
               reject(err);
             }

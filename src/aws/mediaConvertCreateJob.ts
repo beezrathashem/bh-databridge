@@ -1,4 +1,11 @@
-const MEDIA_JOB_PARAMS = (videoId: string, lectureId: string, actionType: "complete" | "skip" = "complete" ) => ({
+const QUALITY_OPTIONS = {
+  "1080": 6000000,
+  "720": 4000000,
+  "480": 1000000,
+  "0": 0,
+}
+
+const MEDIA_JOB_PARAMS = (videoId: string, lectureId: string, actionType: "complete" | "skip" = "complete", quality: "1080" | "720" | "480" | "0") => ({
     Queue: process.env.AWS_MEDIA_CONVERT_QUEUE,
     UserMetadata: {
       lectureId,
@@ -60,10 +67,7 @@ const MEDIA_JOB_PARAMS = (videoId: string, lectureId: string, actionType: "compl
                     GopSize: 90,
                     Slices: 1,
                     GopBReference: 'DISABLED',
-                    // MaxBitrate: 500000,
-                    MaxBitrate: 500000,
-                    // 6000000 1080 p
-                    // 4000000 720 p
+                    MaxBitrate: QUALITY_OPTIONS[quality],
                     SlowPal: 'DISABLED',
                     EntropyEncoding: 'CABAC',
                     FramerateControl: 'INITIALIZE_FROM_SOURCE',
@@ -130,8 +134,7 @@ const MEDIA_JOB_PARAMS = (videoId: string, lectureId: string, actionType: "compl
               SegmentLength: 10,
               TimedMetadataId3Period: 10,
               CaptionLanguageSetting: 'OMIT',
-              // Destination: `s3://${process.env.AWS_STREAMS_BUCKET}/${videoId}-1080/`,
-              Destination: `s3://${process.env.AWS_STREAMS_BUCKET}/${videoId}/`,
+              Destination: `s3://${process.env.AWS_STREAMS_BUCKET}/${videoId}-${quality}/`,
               TimedMetadataId3Frame: 'PRIV',
               CodecSpecification: 'RFC_4281',
               OutputSelection: 'MANIFESTS_AND_SEGMENTS',

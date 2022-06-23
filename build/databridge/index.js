@@ -39,14 +39,15 @@ exports.__esModule = true;
 var aws_1 = require("../aws/aws");
 var databridge = {
     convert: function (_a) {
-        var lectureId = _a.lectureId, videoId = _a.videoId, region = _a.region;
+        var lectureId = _a.lectureId, videoId = _a.videoId, region = _a.region, quality = _a.quality;
         return __awaiter(void 0, void 0, void 0, function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0: return [4 /*yield*/, aws_1["default"].createJob({
                             lectureId: lectureId,
                             videoId: videoId,
-                            region: region
+                            region: region,
+                            quality: quality
                         })];
                     case 1:
                         _b.sent();

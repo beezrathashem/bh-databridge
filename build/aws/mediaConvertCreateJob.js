@@ -1,6 +1,12 @@
 "use strict";
 exports.__esModule = true;
-var MEDIA_JOB_PARAMS = function (videoId, lectureId, actionType) {
+var QUALITY_OPTIONS = {
+    "1080": 6000000,
+    "720": 4000000,
+    "480": 1000000,
+    "0": 0
+};
+var MEDIA_JOB_PARAMS = function (videoId, lectureId, actionType, quality) {
     if (actionType === void 0) { actionType = "complete"; }
     return ({
         Queue: process.env.AWS_MEDIA_CONVERT_QUEUE,
@@ -64,10 +70,7 @@ var MEDIA_JOB_PARAMS = function (videoId, lectureId, actionType) {
                                         GopSize: 90,
                                         Slices: 1,
                                         GopBReference: 'DISABLED',
-                                        // MaxBitrate: 500000,
-                                        MaxBitrate: 500000,
-                                        // 6000000 1080 p
-                                        // 4000000 720 p
+                                        MaxBitrate: QUALITY_OPTIONS[quality],
                                         SlowPal: 'DISABLED',
                                         EntropyEncoding: 'CABAC',
                                         FramerateControl: 'INITIALIZE_FROM_SOURCE',
@@ -134,8 +137,7 @@ var MEDIA_JOB_PARAMS = function (videoId, lectureId, actionType) {
                             SegmentLength: 10,
                             TimedMetadataId3Period: 10,
                             CaptionLanguageSetting: 'OMIT',
-                            // Destination: `s3://${process.env.AWS_STREAMS_BUCKET}/${videoId}-1080/`,
-                            Destination: "s3://".concat(process.env.AWS_STREAMS_BUCKET, "/").concat(videoId, "/"),
+                            Destination: "s3://".concat(process.env.AWS_STREAMS_BUCKET, "/").concat(videoId, "-").concat(quality, "/"),
                             TimedMetadataId3Frame: 'PRIV',
                             CodecSpecification: 'RFC_4281',
                             OutputSelection: 'MANIFESTS_AND_SEGMENTS',
