@@ -2,7 +2,7 @@ const QUALITY_OPTIONS = {
   "1080": 6000000,
   "720": 4000000,
   "480": 1000000,
-  "audio": 0,
+  "audio": 1000,
 }
 
 const MEDIA_JOB_PARAMS = (videoId: string, lectureId: string, actionType: "complete" | "skip" = "complete", quality: "1080" | "720" | "480" | "audio") => ({
